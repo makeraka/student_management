@@ -23,7 +23,8 @@ from student_management_system import settings
 
 
 urlpatterns = [
-    path('', views.showDemoPage, name='home'),
+    path('demo', views.showDemoPage, name='home'),
+    path('', views.showLoginPage, name='login'),
     path('admin/', admin.site.urls),
 ]
 
