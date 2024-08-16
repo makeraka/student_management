@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 
-from student_management_app import views
+from student_management_app import views,HodView
 from student_management_system import settings
 
 
@@ -29,6 +29,15 @@ urlpatterns = [
     path('loginAction', views.loginAction),
     path('get_user_details', views.GetUserDetail),
     path('logout_user', views.logout_user),
+    path('admin_home',HodView.admin_home),
+    path('add_staff',HodView.add_staff),
+    path('add_staff_save',HodView.add_staff_save),
+    path('add_course', HodView.add_course,name="add_course"),
+    path('add_course_save', HodView.add_course_save,name="add_course_save"),
+    path('add_student', HodView.add_student,name="add_student"),
+    path('add_student_save', HodView.add_student_save,name="add_student_save"),
+    path('add_subject', HodView.add_subject,name="add_subject"),
+    path('add_subject_save', HodView.add_subject_save,name="add_subject_save"),
     
 ]
 

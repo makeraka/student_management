@@ -1,0 +1,107 @@
+{% extends "hod_template/base_template.html" %}
+{% block page_title %}
+Ajouter un cours
+  {% endblock page_title %}
+{% block main_content %}
+<section class="content">
+    <div class="container-fluid">
+
+        <div class="card">
+            <div class="card-header bg-primary border-0 pt-2">
+                <h3 class="card-title"> LISTE DES COURS</h3>
+                <div class="card-tools">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModal">
+                        Ajouter un cours
+                    </button>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+
+            <div class="card-body">
+                 <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Course Name</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {% for course in courses %}
+                    <tr>
+                      <td>{{ course.id }}</td>
+                      <td>{{ course.course_name }}</td>
+                      <td><a href="/edit_course/{{ course.id }}" class="btn btn-success">Edit</a></td>
+                    </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <div class="form-group">
+                    {% if messages %}
+                    {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                    <div class="alert alert-danger" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% if message.tags == 'success' %}
+                    <div class="alert alert-success" style="margin-top:10px">{{ message }}</div>
+                    {% endif %}
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+
+    </div>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-primary ">
+                <h5 class="modal-title" id="exampleModalLabel">Ajouter un cours</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" action="/add_course_save" method="post"name="id_cours" >
+                    {% csrf_token %}
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Libellé du Cours </label>
+                            <input type="text" class="form-control" name="course" placeholder="Entrer Cours">
+                        </div>
+                        
+
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary btn-block">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main_content %}
+
+
+ <script>
+   document.getElementById('id_cours').addEventListener('submit', function (event) {
+            event.preventDefault();
+        });
+  <script/>
