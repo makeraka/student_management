@@ -18,9 +18,75 @@ Ajouter un Etudiant
         <!-- /.card-tools -->
       </div>
       <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+        <div class="row">
+          {% for student in students %}
+          <div class="col-lg-4 col-xl-3 col-md-4  mb-10 ">
+            <!-- begin::card -->
+            <div class="card shadow-lg h-100 " style="margin-top: 10px;">
+              <!-- begin::body -->
+              <div class="card-body d-flex-center flex-column">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="symbol symbol-75px symbol-card mb-2 " style="padding-left: 30%;">
 
-      <div class="card-body">
+                      <img src="{{ student.profile_pic }}" style="width:100px; height: 100px;object-fit: cover;border-radius: 50%; border: 2px solid #ccc; " />
+                    </div>
+                    <!-- end::avatar -->
+                  </div>
 
+                  <div class="col-12">
+                    <div class="fw-semibold text-gray-900 fs-1 text-center" style="font-weight: bold;font-size: 1.5rem;text-align: center;color: #343a40;" >{{ student.admin.first_name }}
+                      {{ student.admin.last_name }}</div>
+                  </div>
+
+                  <div class="col-12 justify-content-center">
+                    <table class="mb-5 align-items-center  m-auto mt-2 mx-5px">
+
+                      <tr>
+                        <td class="fw-semibold text-gray-400  text-start">Email :&nbsp </td>
+                        <td  class="fw-semibold text-gray-900  text-start">{{ student.admin.email }}</td>
+                      </tr>
+
+                      <tr>
+                        <td class="fw-semibold text-gray-400  text-start">Adresse :&nbsp </td>
+                         <td  class="fw-semibold text-gray-400  text-start">{{ student.adresse }}</td>
+                      </tr>
+
+                      <tr>
+                        <td class="fw-semibold text-gray-400  text-start">Genre :&nbsp </td>
+                        <td  class="fw-semibold text-gray-400  text-start">{{ student.genre }}</td>
+                      </tr>
+                    </table>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="card-footer">
+
+                <div class="row">
+                  <div class="col-12">
+                    <div class="menu-item px-2">
+                      <table>
+                        <tr>
+                          <td><a href="/edit_student/{{ student.admin.id }}" class="btn btn-success">Modifier</a></td>
+                        </tr>
+
+                      </table>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
       </div>
       <!-- /.card-body -->
 
@@ -56,7 +122,7 @@ Ajouter un Etudiant
         </button>
       </div>
       <div class="modal-body">
-        <form role="from" action="/add_student_save" method="post" id="id_student">
+        <form role="from" action="/add_student_save" method="post" id="id_student" enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-group">
             <label for="email">Adresse Email</label>
@@ -116,6 +182,13 @@ Ajouter un Etudiant
             <input type="date" class="form-control" id="Fin Session" placeholder="Fin Session"
               name="session_end">
           </div>
+
+          <div class="form-group">
+            <label>Image</label>
+            <input type="file" class="form-control" placeholder="choisir l'image"
+              name="profile_pic">
+          </div>
+
 
 
 
