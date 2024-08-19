@@ -5,6 +5,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 
 from student_management_app.EmailBackEnd import EmailBackEnd
+from django.urls import reverse
+
 
 # Create your views here.
 
@@ -26,9 +28,9 @@ def loginAction(request):
             if user.user_type=="1":
                 return HttpResponseRedirect('/admin_home')
             elif user.user_type=="2":
-                return HttpResponse("staff login"+str(user.user_type))
+                return HttpResponseRedirect(reverse("staff_home"))
             else:
-                return HttpResponse("student login"+str(user.user_type))
+                 return HttpResponseRedirect(reverse("student_home"))
         else:
             messages.error(request,"Adresse email ou mot de passe incorrect")
             return HttpResponseRedirect("/")
